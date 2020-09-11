@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br/><br/>
+<h1 class="text-center">Here we are ! </h1>
+
+{% load static %}
+<!-- <img src="{% static 'bdw4.jpg' %}" alt="My image"> -->
+<!-- <div class="container"> -->
+  <br/><br/><br/>
+  <div class="container">
+    <div class="row">
+
+      {% for post in object_list %}
+      <div class="card" style="width: 18rem; margin-right:20px;margin-bottom:10px;">
+       
+        <img src="{% static 'bdw2.jpg' %}" alt="My image">
+        <div class="card-body">
+          <h5 class="card-title"><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a></h5>
+          
+          <br/>     {{post.author.first_name}}  -  {{post.author.last_name}} - {{ post.post_date }}
+          <p class="card-text">{{post.body|slice:":200"|safe }}
+            {{post.snippet}}</p>
+            <small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary">Edit</a>
+                <a href="{% url 'delete_post' post.pk %}" class="btn btn-secondary">Delete</a> 
+              </small> <br />
+  
+    
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+  </div>
+  
+   
+  <!-- </div>
+</div> -->
+    <!-- <ul>
+      {% for post in object_list %}
+          <li><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a>  - 
+              {{post.author.first_name}}  -  {{post.author.last_name}} - {{ post.post_date }}
+              <img class="img-fluid d-flex  mr-3" src="{% static 'bdw2.jpg' %}" alt="" style="height:100%; width:100%; object-fit:cover">
+                -  <small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary">Edit</a>
+              -  <a href="{% url 'delete_post' post.pk %}" class="btn btn-secondary">Delete</a> 
+              </small> <br />
+              {{post.body|slice:":200"|safe }}
+              {{post.snippet}}
+              </li>
+      {% endfor %}
+      </ul>
+  </div>
+</div> -->
+
+
+
+
+
+{% endblock %}
